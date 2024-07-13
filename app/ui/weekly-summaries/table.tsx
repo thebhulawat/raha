@@ -33,28 +33,28 @@ export default function WeeklySummariesTable({
 
   return (
     <div className="mt-6 flow-root">
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="w-full max-w-3xl overflow-hidden rounded-lg bg-[#f7f3e8] shadow">
+        <table className="w-full">
+          <thead className="bg-[#e6e0d0]">
             <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="w-2/3 px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Week Ending
               </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="w-1/3 px-6 py-3 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Summary
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody>
             {weeklySummaries.map((summary) => (
-              <tr key={summary.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              <tr key={summary.id} className="border-b border-gray-200 last:border-b-0">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {formatDateToLocal(summary.weekEnding)}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap text-right">
                   <button 
                     onClick={() => handleView(summary.summary)}
-                    className="text-blue-600 hover:text-blue-900 font-medium text-sm"
+                    className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition-colors duration-200 text-sm font-medium"
                   >
                     View
                   </button>

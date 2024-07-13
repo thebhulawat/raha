@@ -1,16 +1,20 @@
-import React from "react";
 import SideNav from "../ui/sidenav";
+import Header from "../ui/top-bar";
 
-export const experimental_ppr = true
+export const experimental_ppr = true;
 
-export default function Layout({children} : {children: React.ReactNode}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-            <div className="w-full flex-none md:w-64">
-                <SideNav/>
-            </div>
-            <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+      <div className="flex h-screen">
+        <div className="w-64 h-full">
+          <SideNav />
         </div>
-    )
-
-}
+        <div className="flex-1 flex flex-col">
+          <Header />
+          <main className="flex-1 p-6 md:p-12 overflow-y-auto">
+            {children}
+          </main>
+        </div>
+      </div>
+    );
+  }

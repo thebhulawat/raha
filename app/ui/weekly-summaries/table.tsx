@@ -33,63 +33,36 @@ export default function WeeklySummariesTable({
 
   return (
     <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-          <div className="md:hidden">
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Week Ending
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Summary
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
             {weeklySummaries.map((summary) => (
-              <div
-                key={summary.id}
-                className="mb-4 w-full rounded-md bg-white p-4 shadow-sm"
-              >
-                <div className="flex items-center justify-between border-b pb-4">
-                  <div>
-                    <p className="text-sm font-medium text-gray-900">Week Ending: {formatDateToLocal(summary.weekEnding)}</p>
-                  </div>
-                </div>
-                <div className="flex w-full items-center justify-end pt-4">
+              <tr key={summary.id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {formatDateToLocal(summary.weekEnding)}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   <button 
                     onClick={() => handleView(summary.summary)}
-                    className="bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-purple-600 transition duration-300"
+                    className="text-blue-600 hover:text-blue-900 font-medium text-sm"
                   >
-                    View Summary
+                    View
                   </button>
-                </div>
-              </div>
-            ))}
-          </div>
-          <table className="hidden min-w-full text-gray-900 md:table">
-            <thead className="rounded-lg text-left text-sm font-normal">
-              <tr>
-                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Week Ending
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Summary
-                </th>
+                </td>
               </tr>
-            </thead>
-            <tbody className="bg-white">
-              {weeklySummaries.map((summary) => (
-                <tr
-                  key={summary.id}
-                  className="w-full border-b py-3 text-sm last-of-type:border-none hover:bg-gray-50 transition duration-300"
-                >
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {formatDateToLocal(summary.weekEnding)}
-                  </td>
-                  <td className="px-3 py-3">
-                    <button 
-                      onClick={() => handleView(summary.summary)}
-                      className="bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-purple-600 transition duration-300"
-                    >
-                      View Summary
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
       <Popup
         isOpen={viewContent !== null}

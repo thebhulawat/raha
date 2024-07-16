@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import NavLinks from '@/app/ui/nav-links';
 import RahaLogo from '@/app/ui/raha-logo';
-import { PowerIcon } from '@heroicons/react/24/outline';
 import styles from '@/app/ui/Texture.module.css';
 
 

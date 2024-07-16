@@ -61,7 +61,8 @@ export default function Header() {
                 </button>
                 <a href="#" className="block px-4 py-2 text-sm text-[#716A49] hover:bg-[#E6E0D0]">Subscription</a>
                 <SignOutButton>
-                  <button className="block w-full text-left px-4 py-2 text-sm text-[#716A49] hover:bg-[#E6E0D0]">
+                  <button className="block w-full text-left px-4 py-2 text 771996nj
+                  -sm text-[#716A49] hover:bg-[#E6E0D0]">
                     Sign Out
                   </button>
                 </SignOutButton>

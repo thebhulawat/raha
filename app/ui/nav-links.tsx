@@ -2,12 +2,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { PhoneIcon, DocumentTextIcon, HomeIcon } from '@heroicons/react/24/outline';
+import {HomeIcon, LightBulbIcon } from '@heroicons/react/24/outline';
 
 const links = [
   { name: 'Home', href: '/home', icon: HomeIcon },
-  { name: 'Calls', href: '/calls', icon: PhoneIcon },
-  { name: 'Weekly Summaries', href: '/weekly-summaries', icon: DocumentTextIcon },
+  { name: 'Call Insights', href: '/call-insights', icon: LightBulbIcon },
 ];
 
 export default function NavLinks() {

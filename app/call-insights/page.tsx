@@ -1,5 +1,5 @@
 import Pagination from '@/app/ui/pagination';
-import Table from '@/app/ui/calls/table';
+import Table from '@/app/ui/call-insights/table';
 import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';

@@ -1,11 +1,11 @@
 'use client'
-
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, Zap, Lightbulb } from 'lucide-react';
 
-export default function Page() {
+const Page = () => {
   return (
-    <div className="p-8 h-screen bg-[#FBF3D9]">
+    <div className="p-8 min-h-screen bg-[#FBF3D9]">
       <motion.h1 
         className="text-6xl font-bold text-center mb-12 text-[#5D552F] font-serif"
         initial={{ opacity: 0, y: -20 }}
@@ -85,4 +85,6 @@ export default function Page() {
       </motion.div>
     </div>
   );
-}
+};
+
+export default Page;

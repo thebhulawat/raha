@@ -38,8 +38,8 @@ export default function CallsTable({
   return (
     <div className="mt-6 flow-root">
       <div className="overflow-x-auto rounded-lg shadow">
-        <table className="min-w-full divide-y divide-gray-200 bg-[#f7f3e8]">
-          <thead className="bg-[#e6e0d0]">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-100">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Date
@@ -52,13 +52,13 @@ export default function CallsTable({
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="bg-white divide-y divide-gray-200">
             {calls?.map((call) => (
-              <tr key={call.id} className="hover:bg-[#ebe5d3] transition-colors duration-200">
+              <tr key={call.id} className="hover:bg-gray-50 transition-colors duration-200">
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {formatDateToLocal(call.date)}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {call.time}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-center" colSpan={2}>

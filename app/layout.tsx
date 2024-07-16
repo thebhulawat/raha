@@ -1,7 +1,11 @@
 import '@/app/ui/global.css'
 import {inter} from '@/app/ui/fonts'
 import { Metadata } from 'next';
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { ClerkProvider} from '@clerk/nextjs';
+import SideNav from "@/app/ui/sidenav";
+import Header from "@/app/ui/top-bar";
+
+export const experimental_ppr = true;
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +26,17 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} antialiased`} style={{ backgroundColor: '#faf3d9' }}>
-          {children}
+          <div className="flex h-screen">
+            <div className="w-64 h-full">
+              <SideNav />
+            </div>
+            <div className="flex-1 flex flex-col">
+              <Header />
+              <main className="flex-1 p-6 md:p-12 overflow-y-auto">
+                {children}
+              </main>
+            </div>
+          </div>
         </body>
       </html>
     </ClerkProvider>

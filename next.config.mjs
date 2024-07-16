@@ -1,19 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    async redirects() {
-        return [
-          {
-            source: '/home',
-            destination: '/home/calls',
-            permanent: true,
-          },
-          {
-            source: '/',
-            destination: '/home/calls',
-            permanent: true,
-          },
-        ]
-      },
+    // async redirects() {
+    //     return [
+    //       {
+    //         source: '/',
+    //         destination: '/home',
+    //         permanent: true,
+    //       },
+    //       {
+    //         source: '/home/calls',
+    //         destination: '/home',
+    //         permanent: true,
+    //       },
+    //     ]
+    //   },
 };
 
 export default nextConfig;

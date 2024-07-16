@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react';
-import { SignOutButton, useClerk } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
 import { FaUserCircle } from "react-icons/fa";
 import { motion, AnimatePresence } from 'framer-motion';
 import SetupCallSchedule from '@/app/ui/setup-schedule';
@@ -9,7 +9,6 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSetupOpen, setIsSetupOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { signOut } = useClerk();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

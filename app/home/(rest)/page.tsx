@@ -2,8 +2,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, Zap, Lightbulb } from 'lucide-react';
+import { useState } from 'react';
+import ScheduleModal from '@/app/ui/scheduleModal'; // Make sure to import the new component
+
 
 const Page = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className="p-8 min-h-screen bg-[#FBF3D9]">
       <motion.h1 
@@ -28,9 +32,10 @@ const Page = () => {
           className="bg-[#EBE5D3] text-[#5D552F] px-8 py-4 rounded-full shadow-lg hover:bg-[#E6E0D1] transition duration-300 flex items-center justify-center border-2 border-[#5D552F]"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={() => setIsModalOpen(true)}
         >
           <Calendar className="mr-2" size={20} />
-          Schedule a call
+          Schedule Regular Calls
         </motion.button>
       </div>
 
@@ -73,7 +78,7 @@ const Page = () => {
         </div>
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         className="flex items-center justify-center text-[#5D552F] text-sm opacity-60"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -82,7 +87,9 @@ const Page = () => {
         <Zap size={14} className="mr-1 text-yellow-500" />
         <span>0 day streak</span>
         <span className="ml-1 text-xs">(Keep it up!)</span>
-      </motion.div>
+      </motion.div> */}
+      <ScheduleModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import '@/app/ui/global.css'
-import {inter} from '@/app/ui/fonts'
+import {lusitana} from '@/app/ui/fonts'
 import { Metadata } from 'next';
 import { ClerkProvider} from '@clerk/nextjs';
 import SideNav from "@/app/ui/sidenav";
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${inter.className} antialiased`} style={{ backgroundColor: '#faf3d9' }}>
+        <body className={`${lusitana.className} antialiased`} style={{ backgroundColor: '#faf3d9' }}>
           <div className="flex h-screen">
             <div className="w-64 h-full">
               <SideNav />

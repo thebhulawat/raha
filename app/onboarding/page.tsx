@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { completeOnboarding } from "@/app/onboarding/_actions";
-import OnboardingPopup from "@/app/ui/onboarding-popup";
+import OnboardingPopup from "@/app/ui/onboarding/onboarding-modal";
 import { lusitana } from "@/app/ui/fonts";
 
 export default function OnboardingPage() {

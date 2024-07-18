@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${lusitana.className} antialiased`} style={{ backgroundColor: '#faf3d9' }}>
+        <body className={`${lusitana.className} antialiased `} style={{ backgroundColor: '#faf3d9' }}>
           <div className="flex h-screen">
             <div className="w-64 h-full">
               <SideNav />

@@ -1,23 +1,28 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Phone, Zap, Lightbulb } from 'lucide-react';
+import { Calendar, Phone, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
-import ScheduleModal from '@/app/ui/scheduleModal'; // Make sure to import the new component
+import ScheduleModal from '@/app/ui/schedule-modal'; // Make sure to import the new component
 import FreeCallModal from '@/app/ui/home/freecall';
+import { abril } from '@/app/ui/fonts';
+import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
 const Page = () => {
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [isFreeCallModalOpen, setIsFreeCallModalOpen] = useState(false);
+  const router = useRouter()
   return (
     <div className="p-8 min-h-screen bg-[#FBF3D9]">
       <motion.h1 
-        className="text-6xl font-bold text-center mb-12 text-[#5D552F] font-serif"
+        className={`${abril.className} text-6xl font-bold text-center mb-12 text-[#5D552F]`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
+        {/* TODO: Update Naman here */}
         Know yourself, Naman!
       </motion.h1>
 
@@ -74,6 +79,7 @@ const Page = () => {
             className="bg-transparent text-[#4A6741] px-4 py-2 rounded-full hover:bg-[#EBE5D3] transition duration-300 text-sm flex items-center border border-[#4A6741]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => router.push('/call-insights')}
           >
             <Lightbulb className="mr-2" size={16} />
             View Call Insights

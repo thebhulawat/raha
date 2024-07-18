@@ -1,9 +1,5 @@
-export default function Page() {
-  return (
-    <main>
-      <div>
-        <h1>This is raha home. but we don't want to show this route</h1>
-      </div>
-    </main>
-  );
+import { redirect } from 'next/navigation';
+
+export default function Home() {
+  redirect('/home');
 }

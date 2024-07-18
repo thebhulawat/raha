@@ -6,14 +6,14 @@ import { useState } from 'react';
 import ScheduleModal from '@/app/ui/schedule-modal'; // Make sure to import the new component
 import FreeCallModal from '@/app/ui/home/freecall';
 import { abril } from '@/app/ui/fonts';
-import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 
-const Page = () => {
+export default async function Page() {
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [isFreeCallModalOpen, setIsFreeCallModalOpen] = useState(false);
   const router = useRouter()
+  
   return (
     <div className="p-8 min-h-screen bg-[#FBF3D9]">
       <motion.h1 
@@ -103,5 +103,3 @@ const Page = () => {
     </div>
   );
 };
-
-export default Page;

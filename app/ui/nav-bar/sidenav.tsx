@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import NavLinks from '@/app/ui/nav-links';
+import NavLinks from '@/app/ui/nav-bar/nav-links';
 import RahaLogo from '@/app/ui/raha-logo';
 import styles from '@/app/ui/Texture.module.css';
 

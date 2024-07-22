@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { SignOutButton } from "@clerk/nextjs";
 import { FaUserCircle } from "react-icons/fa";
 import { motion, AnimatePresence } from 'framer-motion';
-import SetupCallSchedule from '@/app/ui/setup-schedule';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,11 +70,6 @@ export default function Header() {
           </AnimatePresence>
         </div>
       </header>
-      <SetupCallSchedule 
-        isOpen={isSetupOpen} 
-        onClose={() => setIsSetupOpen(false)} 
-        onSave={handleSetupSave}
-      />
     </>
   );
 }

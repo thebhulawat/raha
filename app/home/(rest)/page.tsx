@@ -3,13 +3,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
-import ScheduleModal from '@/app/ui/schedule-modal'; // Make sure to import the new component
+import ScheduleModal from '@/app/ui/home/schedule-modal'; // Make sure to import the new component
 import FreeCallModal from '@/app/ui/home/freecall';
 import { abril } from '@/app/ui/fonts';
 import { useRouter } from 'next/navigation';
 
 
-export default async function Page() {
+export default function Page() {
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [isFreeCallModalOpen, setIsFreeCallModalOpen] = useState(false);
   const router = useRouter()

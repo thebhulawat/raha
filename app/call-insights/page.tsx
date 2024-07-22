@@ -6,11 +6,11 @@ import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 //import { fetchInvoicesPages } from '@/app/lib/data';
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Calls'
-}
+// export const metadata: Metadata = {
+//   title: 'Calls'
+// }
 
-export default async function Page({
+export default function Page({
   searchParams,
 }: {
   searchParams?: {
@@ -20,6 +20,10 @@ export default async function Page({
   const currentPage = Number(searchParams?.page) || 1;
   //const totalPages = await fetchInvoicesPages(query)
   // Todo update this later 
+  // const response = await fetch('http://localhost:3001/')
+  // const x = await response.json()
+  // console.log(x);
+  
  
   return (
     <div className="w-full">

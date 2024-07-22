@@ -8,7 +8,7 @@ interface ScheduleModalProps {
   onClose: () => void;
 }
 
-const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose }) => {
+export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps) {
   const [step, setStep] = useState<'schedule' | 'payment'>('schedule');
   const [scheduleType, setScheduleType] = useState<'daily' | 'custom'>('daily');
   const [time, setTime] = useState('09:00');
@@ -216,5 +216,3 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose }) => {
     </AnimatePresence>
   );
 };
-
-export default ScheduleModal;

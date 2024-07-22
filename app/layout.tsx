@@ -2,8 +2,8 @@ import '@/app/ui/global.css'
 import {lusitana} from '@/app/ui/fonts'
 import { Metadata } from 'next';
 import { ClerkProvider} from '@clerk/nextjs';
-import SideNav from "@/app/ui/sidenav";
-import Header from "@/app/ui/top-bar";
+import SideNav from "@/app/ui/nav-bar/sidenav";
+import Header from "@/app/ui/top-bar/top-bar";
 
 export const experimental_ppr = true;
 

@@ -1,10 +1,11 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { formatDateToLocal } from '@/app/lib/utils';
 import InsightsPopup from '@/app/ui/call-insights/insight-modal';
 import TranscriptModal from '@/app/ui/call-insights/transcript-modal';
 import Popup from '@/app/ui/popup';
 import { DocumentTextIcon, LightBulbIcon } from '@heroicons/react/24/outline';
+import { useAuth } from '@clerk/nextjs';
 
 interface Insight {
   title: string;
@@ -32,6 +33,36 @@ export default function CallsTable({
   currentPage: number;
 }) {
   const [viewContent, setViewContent] = useState<{ type: string; content: any } | null>(null);
+  const { getToken } = useAuth()
+  useEffect(() => {
+    console.log('here');
+    
+    const fetchCalls = async () => {
+      try {
+         const token = await getToken()
+        const response = await fetch(`https://bf2b-49-207-219-226.ngrok-free.app/`, 
+        {
+          mode: 'no-cors',
+          headers: {
+            'ngrok-skip-browser-warning': 'true',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          }
+        }
+        );
+        
+        if (!response.ok) throw new Error('Failed to fetch calls');
+        const data = await response.json();
+        console.log('data', data);
+        // You should probably do something with the data here, like setting it to state
+      } catch (error) {
+        console.error('Error fetching calls:', error);
+        // Handle error state
+      } 
+    };
+  
+    fetchCalls(); // Call the function
+  }, []);
 
   const calls: Call[] = [
     {

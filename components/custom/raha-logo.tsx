@@ -1,20 +1,29 @@
 import React from 'react';
 import { FaLeaf } from 'react-icons/fa';
-import { playfair } from '@/app/ui/fonts';
+import { playfair } from '@/app/fonts';
 
 interface RahaLogoProps {
-  colorScheme?: 'default' | 'serene' | 'soothing' | 'tranquil' | 'balanced' | 'comforting';
+  colorScheme?:
+    | 'default'
+    | 'serene'
+    | 'soothing'
+    | 'tranquil'
+    | 'balanced'
+    | 'comforting';
   showIcon?: boolean;
 }
 
-const RahaLogo: React.FC<RahaLogoProps> = ({ colorScheme = 'default', showIcon = true }) => {
+const RahaLogo: React.FC<RahaLogoProps> = ({
+  colorScheme = 'default',
+  showIcon = true,
+}) => {
   const colorSchemes: { [key: string]: string } = {
     default: 'linear-gradient(45deg, #8E9B90, #D1E2C7)',
     serene: 'linear-gradient(45deg, #8E9B90, #D1E2C7)',
     soothing: 'linear-gradient(45deg, #C7BCA1, #F1E3D3)',
     tranquil: 'linear-gradient(45deg, #A1B5D8, #E2EAF3)',
     balanced: 'linear-gradient(45deg, #D7C0A1, #F3E8D3)',
-    comforting: 'linear-gradient(45deg, #B5A288, #D9C7B8)'
+    comforting: 'linear-gradient(45deg, #B5A288, #D9C7B8)',
   };
 
   const logoStyle: React.CSSProperties = {
@@ -32,13 +41,16 @@ const RahaLogo: React.FC<RahaLogoProps> = ({ colorScheme = 'default', showIcon =
 
   return (
     <div className="flex items-center h-full p-2">
-      <h1 
+      <h1
         className="flex items-center"
         style={logoStyle}
         aria-label="Raha logo"
       >
         {showIcon && (
-          <span className="mr-3" style={{ fontSize: '0.7em', display: 'flex', alignItems: 'center' }}>
+          <span
+            className="mr-3"
+            style={{ fontSize: '0.7em', display: 'flex', alignItems: 'center' }}
+          >
             <FaLeaf />
           </span>
         )}

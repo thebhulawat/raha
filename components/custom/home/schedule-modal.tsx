@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Clock, ArrowLeft } from 'lucide-react';
-import { lusitana } from '@/app/ui/fonts';
+import { lusitana } from '@/app/fonts';
 
 interface ScheduleModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps) {
+export default function ScheduleModal({ isOpen, onClose }: ScheduleModalProps) {
   const [step, setStep] = useState<'schedule' | 'payment'>('schedule');
   const [scheduleType, setScheduleType] = useState<'daily' | 'custom'>('daily');
   const [time, setTime] = useState('09:00');
@@ -17,9 +17,9 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   const handleDayToggle = (day: string) => {
-    setSelectedDays(prevDays => 
-      prevDays.includes(day) 
-        ? prevDays.filter(d => d !== day)
+    setSelectedDays((prevDays) =>
+      prevDays.includes(day)
+        ? prevDays.filter((d) => d !== day)
         : [...prevDays, day]
     );
   };
@@ -28,7 +28,7 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
     const schedule = {
       type: scheduleType,
       time,
-      days: scheduleType === 'custom' ? selectedDays : ['Every day']
+      days: scheduleType === 'custom' ? selectedDays : ['Every day'],
     };
     console.log('Saving schedule:', schedule);
     setStep('payment');
@@ -43,7 +43,9 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
     const options = [];
     for (let hour = 0; hour < 24; hour++) {
       for (let minute = 0; minute < 60; minute += 5) {
-        const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+        const timeString = `${hour.toString().padStart(2, '0')}:${minute
+          .toString()
+          .padStart(2, '0')}`;
         options.push(
           <option key={timeString} value={timeString}>
             {timeString}
@@ -71,14 +73,20 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
           >
             <div className="flex justify-between items-center mb-8">
               {step === 'payment' && (
-                <button onClick={() => setStep('schedule')} className="text-[#5D552F] hover:text-opacity-70 transition-colors">
+                <button
+                  onClick={() => setStep('schedule')}
+                  className="text-[#5D552F] hover:text-opacity-70 transition-colors"
+                >
                   <ArrowLeft size={24} />
                 </button>
               )}
               <h2 className="text-3xl font-semibold text-[#5D552F]">
                 {step === 'schedule' ? 'Schedule Calls' : 'Payment Details'}
               </h2>
-              <button onClick={onClose} className="text-[#5D552F] hover:text-opacity-70 transition-colors">
+              <button
+                onClick={onClose}
+                className="text-[#5D552F] hover:text-opacity-70 transition-colors"
+              >
                 <X size={24} />
               </button>
             </div>
@@ -97,8 +105,8 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
                     <button
                       onClick={() => setScheduleType('daily')}
                       className={`flex-1 px-6 py-3 rounded-full text-lg transition-colors ${
-                        scheduleType === 'daily' 
-                          ? 'bg-[#F7F3E8] text-[#5D552F] shadow-inner' 
+                        scheduleType === 'daily'
+                          ? 'bg-[#F7F3E8] text-[#5D552F] shadow-inner'
                           : 'bg-[#EBE5D3] text-[#5D552F] hover:bg-[#F7F3E8]'
                       }`}
                     >
@@ -107,8 +115,8 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
                     <button
                       onClick={() => setScheduleType('custom')}
                       className={`flex-1 px-6 py-3 rounded-full text-lg transition-colors ${
-                        scheduleType === 'custom' 
-                          ? 'bg-[#F7F3E8] text-[#5D552F] shadow-inner' 
+                        scheduleType === 'custom'
+                          ? 'bg-[#F7F3E8] text-[#5D552F] shadow-inner'
                           : 'bg-[#EBE5D3] text-[#5D552F] hover:bg-[#F7F3E8]'
                       }`}
                     >
@@ -117,10 +125,12 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
                   </div>
 
                   <div className="relative">
-                    <Clock 
-                      size={24} 
-                      className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#5D552F] cursor-pointer" 
-                      onClick={() => document.getElementById('time-select')?.focus()}
+                    <Clock
+                      size={24}
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#5D552F] cursor-pointer"
+                      onClick={() =>
+                        document.getElementById('time-select')?.focus()
+                      }
                     />
                     <select
                       id="time-select"
@@ -135,7 +145,9 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
 
                   {scheduleType === 'custom' && (
                     <div className="space-y-4">
-                      <p className="text-[#5D552F] font-medium text-lg">Select days for weekly calls:</p>
+                      <p className="text-[#5D552F] font-medium text-lg">
+                        Select days for weekly calls:
+                      </p>
                       <div className="flex flex-wrap gap-3 justify-center">
                         {daysOfWeek.map((day) => (
                           <button
@@ -155,7 +167,9 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
                   )}
 
                   <div className="mt-8 space-y-4">
-                    <p className="text-sm text-[#5D552F] italic">We will charge you only after the first 3 calls.</p>
+                    <p className="text-sm text-[#5D552F] italic">
+                      We will charge you only after the first 3 calls.
+                    </p>
                     <div className="flex justify-end space-x-4">
                       <button
                         onClick={onClose}
@@ -215,4 +229,4 @@ export default function ScheduleModal ({ isOpen, onClose } : ScheduleModalProps)
       )}
     </AnimatePresence>
   );
-};
+}

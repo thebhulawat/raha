@@ -1,21 +1,20 @@
 export const formatDateToLocal = (
-    dateStr: string,
-    locale: string = 'en-US',
-  ) => {
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) {
-      // dateStr is not a valid date
-      return;
-    }
-    const options: Intl.DateTimeFormatOptions = {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    };
-    const formatter = new Intl.DateTimeFormat(locale, options);
-    return formatter.format(date);
+  dateStr: string,
+  locale: string = 'en-US'
+) => {
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) {
+    // dateStr is not a valid date
+    return;
+  }
+  const options: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
   };
-
+  const formatter = new Intl.DateTimeFormat(locale, options);
+  return formatter.format(date);
+};
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,

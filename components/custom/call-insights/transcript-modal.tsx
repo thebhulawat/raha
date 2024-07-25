@@ -1,6 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
-import { lusitana } from '@/app/ui/fonts';
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+} from 'framer-motion';
+import { lusitana } from '@/app/fonts';
 import { ClipboardIcon, CheckIcon } from '@heroicons/react/24/outline';
 
 interface Message {
@@ -14,7 +19,11 @@ interface TranscriptPopupProps {
   transcript: Message[];
 }
 
-const TranscriptPopup: React.FC<TranscriptPopupProps> = ({ isOpen, onClose, transcript }) => {
+const TranscriptPopup: React.FC<TranscriptPopupProps> = ({
+  isOpen,
+  onClose,
+  transcript,
+}) => {
   const y = useMotionValue(0);
   const opacity = useTransform(y, [0, 100], [1, 0]);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -27,7 +36,9 @@ const TranscriptPopup: React.FC<TranscriptPopupProps> = ({ isOpen, onClose, tran
   };
 
   const handleCopy = () => {
-    const fullTranscript = transcript.map(msg => `${msg.speaker}: ${msg.content}`).join('\n\n');
+    const fullTranscript = transcript
+      .map((msg) => `${msg.speaker}: ${msg.content}`)
+      .join('\n\n');
     navigator.clipboard.writeText(fullTranscript);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -41,9 +52,9 @@ const TranscriptPopup: React.FC<TranscriptPopupProps> = ({ isOpen, onClose, tran
       transition: {
         delay: i * 0.1,
         duration: 0.5,
-        ease: "easeOut"
-      }
-    })
+        ease: 'easeOut',
+      },
+    }),
   };
 
   return (
@@ -78,10 +89,14 @@ const TranscriptPopup: React.FC<TranscriptPopupProps> = ({ isOpen, onClose, tran
                 className="p-2 text-[#5D552F] hover:bg-[#F7F3E8] rounded-full transition-colors duration-200"
                 title="Copy transcript"
               >
-                {copied ? <CheckIcon className="w-6 h-6" /> : <ClipboardIcon className="w-6 h-6" />}
+                {copied ? (
+                  <CheckIcon className="w-6 h-6" />
+                ) : (
+                  <ClipboardIcon className="w-6 h-6" />
+                )}
               </button>
             </div>
-            
+
             <div className="flex-grow overflow-y-auto pr-4 -mr-4 space-y-4">
               {transcript.map((message, index) => (
                 <motion.div
@@ -92,8 +107,12 @@ const TranscriptPopup: React.FC<TranscriptPopupProps> = ({ isOpen, onClose, tran
                   custom={index}
                   className="bg-[#F7F3E8] p-4 rounded-xl shadow-sm"
                 >
-                  <h3 className="text-lg font-semibold text-[#5D552F] mb-2">{message.speaker}</h3>
-                  <p className="text-[#5D552F] text-opacity-90">{message.content}</p>
+                  <h3 className="text-lg font-semibold text-[#5D552F] mb-2">
+                    {message.speaker}
+                  </h3>
+                  <p className="text-[#5D552F] text-opacity-90">
+                    {message.content}
+                  </p>
                 </motion.div>
               ))}
             </div>

@@ -1,14 +1,14 @@
-import Pagination from '@/app/ui/pagination';
-import WeeklySummariesTable from '@/app/ui/weekly-summaries/table';
-import { lusitana } from '@/app/ui/fonts';
+import Pagination from '@/components/custom/pagination';
+import WeeklySummariesTable from '@/components/custom/weekly-summaries/table';
+import { lusitana } from '@/app/fonts';
 import { Suspense } from 'react';
-import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+import { InvoicesTableSkeleton } from '@/components/custom/skeletons';
 //import { fetchWeeklySummariesPages } from '@/app/lib/data';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Weekly Summaries'
-}
+  title: 'Weekly Summaries',
+};
 
 export default async function Page({
   searchParams,

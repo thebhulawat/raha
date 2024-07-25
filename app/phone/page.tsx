@@ -1,10 +1,16 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { PhoneNumberResource } from '@clerk/types';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2 } from 'lucide-react';
 
@@ -23,7 +29,9 @@ export default function ClerkOTPFlow() {
   if (isLoaded && !user?.id) {
     return (
       <Alert variant="destructive">
-        <AlertDescription>You must be logged in to access this page</AlertDescription>
+        <AlertDescription>
+          You must be logged in to access this page
+        </AlertDescription>
       </Alert>
     );
   }
@@ -75,7 +83,9 @@ export default function ClerkOTPFlow() {
           <CardTitle className="text-center text-green-600">Success!</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-center">Your phone number has been successfully added and verified.</p>
+          <p className="text-center">
+            Your phone number has been successfully added and verified.
+          </p>
         </CardContent>
       </Card>
     );
@@ -90,7 +100,10 @@ export default function ClerkOTPFlow() {
         <form onSubmit={isVerifying ? verifyCode : handleSubmit}>
           {isVerifying ? (
             <div className="space-y-4">
-              <label htmlFor="code" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="code"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Enter verification code
               </label>
               <Input
@@ -104,7 +117,10 @@ export default function ClerkOTPFlow() {
             </div>
           ) : (
             <div className="space-y-4">
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Enter phone number
               </label>
               <Input

@@ -1,21 +1,21 @@
-import '@/app/ui/global.css'
-import {lusitana} from '@/app/ui/fonts'
+import '@/app/global.css';
+import { lusitana } from '@/app/fonts';
 import { Metadata } from 'next';
-import { ClerkProvider} from '@clerk/nextjs';
-import SideNav from "@/app/ui/nav-bar/sidenav";
-import Header from "@/app/ui/top-bar/top-bar";
+import { ClerkProvider } from '@clerk/nextjs';
+import SideNav from '@/components/custom/nav-bar/sidenav';
+import Header from '@/components/custom/top-bar/top-bar';
 
 export const experimental_ppr = true;
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Raha Home', 
-    default: 'Raha Home dashboard'
+    template: '%s | Raha Home',
+    default: 'Raha Home dashboard',
   },
   description: 'Raha Home for setting up calls and analyzing',
-  // TODO: Update this url and other metadata 
-  metadataBase: new URL('https://next-learn-dashboard.vercel.sh')
-}
+  // TODO: Update this url and other metadata
+  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+};
 
 export default function RootLayout({
   children,
@@ -25,7 +25,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${lusitana.className} antialiased `} style={{ backgroundColor: '#faf3d9' }}>
+        <body
+          className={`${lusitana.className} antialiased `}
+          style={{ backgroundColor: '#faf3d9' }}
+        >
           <div className="flex h-screen">
             <div className="w-64 h-full">
               <SideNav />

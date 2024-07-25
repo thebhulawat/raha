@@ -1,22 +1,21 @@
-'use client'
+'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
-import ScheduleModal from '@/app/ui/home/schedule-modal'; // Make sure to import the new component
-import FreeCallModal from '@/app/ui/home/freecall';
-import { abril } from '@/app/ui/fonts';
+import ScheduleModal from '@/components/custom/home/schedule-modal'; // Make sure to import the new component
+import FreeCallModal from '@/components/custom/home/freecall';
+import { abril } from '@/app/fonts';
 import { useRouter } from 'next/navigation';
-
 
 export default function Page() {
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [isFreeCallModalOpen, setIsFreeCallModalOpen] = useState(false);
-  const router = useRouter()
-  
+  const router = useRouter();
+
   return (
     <div className="p-8 min-h-screen bg-[#FBF3D9]">
-      <motion.h1 
+      <motion.h1
         className={`${abril.className} text-6xl font-bold text-center mb-12 text-[#5D552F]`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -47,7 +46,7 @@ export default function Page() {
         </motion.button>
       </div>
 
-      <motion.p 
+      <motion.p
         className="text-center text-sm mb-24 text-[#5D552F] font-medium italic"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.8 }}
@@ -56,20 +55,26 @@ export default function Page() {
         Enjoy three complimentary 30-minute calls to start your journey
       </motion.p>
 
-      <motion.div 
+      <motion.div
         className="bg-[#F7F3E8] rounded-2xl shadow-lg p-6 max-w-3xl mx-auto mb-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <h2 className="text-xl font-semibold mb-4 text-[#5D552F]">Upcoming Calls</h2>
+        <h2 className="text-xl font-semibold mb-4 text-[#5D552F]">
+          Upcoming Calls
+        </h2>
         <div className="space-y-4">
           <div className="flex items-center justify-between bg-[#EBE5D3] p-3 rounded-lg">
             <div className="flex items-center">
               <Calendar className="mr-3 text-[#5D552F]" size={20} />
               <div>
-                <p className="font-xs text-[#5D552F] text-sm">No upcoming calls</p>
-                <p className="text-xs text-[#5D552F] opacity-75">Schedule your next call</p>
+                <p className="font-xs text-[#5D552F] text-sm">
+                  No upcoming calls
+                </p>
+                <p className="text-xs text-[#5D552F] opacity-75">
+                  Schedule your next call
+                </p>
               </div>
             </div>
           </div>
@@ -97,9 +102,14 @@ export default function Page() {
         <span>0 day streak</span>
         <span className="ml-1 text-xs">(Keep it up!)</span>
       </motion.div> */}
-      <ScheduleModal isOpen={isScheduleModalOpen} onClose={() => setIsScheduleModalOpen(false)} />
-      <FreeCallModal isOpen={isFreeCallModalOpen} onClose={() => setIsFreeCallModalOpen(false)} />
-
+      <ScheduleModal
+        isOpen={isScheduleModalOpen}
+        onClose={() => setIsScheduleModalOpen(false)}
+      />
+      <FreeCallModal
+        isOpen={isFreeCallModalOpen}
+        onClose={() => setIsFreeCallModalOpen(false)}
+      />
     </div>
   );
-};
+}

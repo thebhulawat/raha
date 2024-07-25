@@ -1,10 +1,16 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUser } from '@clerk/nextjs';
 import { PhoneNumberResource } from '@clerk/types';
-import { PopupContent, Button, PhoneInputSection, ErrorMessage, SuccessMessage } from './shared';
-import RahaLogo from '@/app/ui/raha-logo';
+import {
+  PopupContent,
+  Button,
+  PhoneInputSection,
+  ErrorMessage,
+  SuccessMessage,
+} from './shared';
+import RahaLogo from '@/components/custom/raha-logo';
 import { Loader2 } from 'lucide-react';
 
 interface Step4Props {
@@ -17,7 +23,12 @@ interface Step4Props {
 }
 
 const Step4: React.FC<Step4Props> = ({
-  prevStep, onClose, countryCode, setCountryCode, phoneNumber, setPhoneNumber
+  prevStep,
+  onClose,
+  countryCode,
+  setCountryCode,
+  phoneNumber,
+  setPhoneNumber,
 }) => {
   const { isLoaded, user } = useUser();
   const [phoneObj, setPhoneObj] = useState<PhoneNumberResource | undefined>();
@@ -34,7 +45,7 @@ const Step4: React.FC<Step4Props> = ({
     let interval: NodeJS.Timeout;
     if (timer > 0) {
       interval = setInterval(() => {
-        setTimer(t => t - 1);
+        setTimer((t) => t - 1);
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -55,7 +66,7 @@ const Step4: React.FC<Step4Props> = ({
       setPhoneObj(newPhoneNumber);
       await newPhoneNumber?.prepareVerification();
       setOtpSent(true);
-      setSuccess("Verification code sent successfully!");
+      setSuccess('Verification code sent successfully!');
       setTimer(60);
     } catch (err) {
       setError('Failed to send verification code. Please try again.');
@@ -71,10 +82,12 @@ const Step4: React.FC<Step4Props> = ({
     setSuccess('');
 
     try {
-      const phoneVerifyAttempt = await phoneObj?.attemptVerification({ code: otp });
+      const phoneVerifyAttempt = await phoneObj?.attemptVerification({
+        code: otp,
+      });
       if (phoneVerifyAttempt?.verification.status === 'verified') {
         setOtpVerified(true);
-        setSuccess("Phone number verified successfully!");
+        setSuccess('Phone number verified successfully!');
       } else {
         setError('Verification failed. Please check the code and try again.');
       }
@@ -96,9 +109,12 @@ const Step4: React.FC<Step4Props> = ({
       <div className="flex items-center mb-8">
         <RahaLogo colorScheme="balanced" showIcon={true} />
       </div>
-      <h2 className="text-3xl font-semibold mb-6 text-[#5D552F]">Just one last thing!</h2>
+      <h2 className="text-3xl font-semibold mb-6 text-[#5D552F]">
+        Just one last thing!
+      </h2>
       <p className="text-[#5D552F] mb-4 text-lg leading-relaxed font-normal">
-        We need your phone number to call you and send a one-time code. We take your privacy very seriously.
+        We need your phone number to call you and send a one-time code. We take
+        your privacy very seriously.
       </p>
       <PhoneInputSection
         countryCode={countryCode}
@@ -122,11 +138,16 @@ const Step4: React.FC<Step4Props> = ({
             }}
             className="w-[200px] p-2 mr-2 border border-[#8E9B90] rounded text-lg"
           />
-          <Button onClick={handleVerifyOtp} disabled={loading || otp.length === 0}>
+          <Button
+            onClick={handleVerifyOtp}
+            disabled={loading || otp.length === 0}
+          >
             {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
             Verify Code
           </Button>
-          {timer > 0 && <span className="ml-2 text-sm">Resend in {timer}s</span>}
+          {timer > 0 && (
+            <span className="ml-2 text-sm">Resend in {timer}s</span>
+          )}
         </div>
       )}
       <div className="flex justify-between mt-8">

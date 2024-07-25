@@ -1,14 +1,19 @@
-'use client'
+'use client';
 import React, { useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
-import { lusitana } from '@/app/ui/fonts';
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+} from 'framer-motion';
+import { lusitana } from '@/app/fonts';
 
 interface FreeCallModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function FreeCallModal({isOpen, onClose}: FreeCallModalProps) {
+export default function FreeCallModal({ isOpen, onClose }: FreeCallModalProps) {
   const y = useMotionValue(0);
   const opacity = useTransform(y, [0, 100], [1, 0]);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -51,7 +56,7 @@ export default function FreeCallModal({isOpen, onClose}: FreeCallModalProps) {
               className="text-center space-y-6 mt-4"
             >
               <p className="text-xl text-[#5D552F] leading-relaxed">
-                Your free call from Raha is on its way! 📞✨🎉 
+                Your free call from Raha is on its way! 📞✨🎉
               </p>
             </motion.div>
 

@@ -1,6 +1,11 @@
 import React, { useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
-import { lusitana } from '@/app/ui/fonts';
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+} from 'framer-motion';
+import { lusitana } from '@/app/fonts';
 
 interface InsightProps {
   title: string;
@@ -14,7 +19,11 @@ interface InsightsPopupProps {
   insights: InsightProps[];
 }
 
-const InsightsPopup: React.FC<InsightsPopupProps> = ({ isOpen, onClose, insights }) => {
+const InsightsPopup: React.FC<InsightsPopupProps> = ({
+  isOpen,
+  onClose,
+  insights,
+}) => {
   const y = useMotionValue(0);
   const opacity = useTransform(y, [0, 100], [1, 0]);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -33,21 +42,21 @@ const InsightsPopup: React.FC<InsightsPopupProps> = ({ isOpen, onClose, insights
       transition: {
         delay: i * 0.1,
         duration: 0.5,
-        ease: "easeOut"
-      }
-    })
+        ease: 'easeOut',
+      },
+    }),
   };
 
   const hoverVariants = {
     hover: {
       scale: 1.03,
-      boxShadow: "0px 5px 15px rgba(0,0,0,0.1)",
+      boxShadow: '0px 5px 15px rgba(0,0,0,0.1)',
       transition: {
-        type: "spring",
+        type: 'spring',
         stiffness: 400,
-        damping: 10
-      }
-    }
+        damping: 10,
+      },
+    },
   };
 
   return (
@@ -75,8 +84,10 @@ const InsightsPopup: React.FC<InsightsPopupProps> = ({ isOpen, onClose, insights
           >
             <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-10 h-1 bg-[#5D552F] opacity-50 rounded-full" />
 
-            <h2 className="text-3xl font-bold text-[#5D552F] mb-6 mt-2">Insights</h2>
-            
+            <h2 className="text-3xl font-bold text-[#5D552F] mb-6 mt-2">
+              Insights
+            </h2>
+
             <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-4 -mr-4">
               {insights.map((insight, index) => (
                 <motion.div
@@ -94,13 +105,20 @@ const InsightsPopup: React.FC<InsightsPopupProps> = ({ isOpen, onClose, insights
                         className="mr-2 text-2xl"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        transition={{ delay: index * 0.1 + 0.3, type: "spring", stiffness: 200, damping: 10 }}
+                        transition={{
+                          delay: index * 0.1 + 0.3,
+                          type: 'spring',
+                          stiffness: 200,
+                          damping: 10,
+                        }}
                       >
                         {insight.emoji}
                       </motion.span>
                       {insight.title}
                     </h3>
-                    <p className="text-[#5D552F] text-opacity-90">{insight.description}</p>
+                    <p className="text-[#5D552F] text-opacity-90">
+                      {insight.description}
+                    </p>
                   </motion.div>
                 </motion.div>
               ))}

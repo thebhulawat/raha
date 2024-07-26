@@ -8,7 +8,7 @@ import {
 } from 'framer-motion';
 import { lusitana } from '@/app/fonts';
 import { useAuth } from '@clerk/nextjs';
-import { call } from '@/app/api/calls';
+import { call } from '@/api/calls';
 
 interface CallNowModalProps {
   isOpen: boolean;

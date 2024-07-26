@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
-import ScheduleModal from '@/components/custom/home/schedule-modal'; // Make sure to import the new component
+import ScheduleModal from '@/components/custom/home/schedule'; 
 import { abril } from '@/app/fonts';
 import { useRouter } from 'next/navigation';
 import CallNowModal from '@/components/custom/home/call-now';
@@ -17,6 +17,7 @@ export default function Page() {
   const router = useRouter();
   const { userDetails } = useUserStore();
   const { userId, getToken } = useAuth();
+
 
   useEffect(() => {
     if (userId) {
@@ -36,7 +37,6 @@ export default function Page() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* TODO: Update Naman here */}
         Know yourself, {userDetails.firstName}!
       </motion.h1>
 

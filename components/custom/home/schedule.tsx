@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, ChevronUp, ChevronDown, Check } from 'lucide-react';
 import { lusitana } from '@/app/fonts';
-import { createOrUpdateSchedule } from '@/app/api/schedules';
+import { createOrUpdateSchedule } from '@/api/schedules';
 import { useAuth } from '@clerk/nextjs';
 import moment from 'moment-timezone';
 

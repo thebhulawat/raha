@@ -28,6 +28,11 @@ export default function Page() {
     return <HomePageSkeleton />;
   }
 
+  const quoteVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <div className="p-8 min-h-screen bg-[#FBF3D9]">
       <motion.h1
@@ -61,7 +66,7 @@ export default function Page() {
       </div>
 
       <motion.p
-        className="text-center text-sm mb-24 text-[#5D552F] font-medium italic"
+        className="text-center text-sm mb-32 text-[#5D552F] font-medium italic"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.8 }}
         transition={{ duration: 0.5, delay: 0.3 }}
@@ -70,30 +75,41 @@ export default function Page() {
       </motion.p>
 
       <motion.div
-        className="bg-[#F7F3E8] rounded-2xl shadow-lg p-6 max-w-3xl mx-auto mb-6"
+        className="bg-[#F7F3E8] rounded-2xl shadow-md p-4 max-w-2xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <h2 className="text-xl font-semibold mb-4 text-[#5D552F]">
-          Upcoming Calls
-        </h2>
         <div className="space-y-4">
-          <div className="flex items-center justify-between bg-[#EBE5D3] p-3 rounded-lg">
-            <div className="flex items-center">
-              <Calendar className="mr-3 text-[#5D552F]" size={20} />
-              <div>
-                <p className="font-xs text-[#5D552F] text-sm">
-                  No upcoming calls
-                </p>
-                <p className="text-xs text-[#5D552F] opacity-75">
-                  Schedule your next call
-                </p>
-              </div>
-            </div>
-          </div>
+          <motion.div
+            variants={quoteVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <p className="text-[#5D552F] text-sm italic text-center">
+              "Knowing yourself is the beginning of all wisdom."
+            </p>
+            <p className="text-[#5D552F] text-xs text-right mt-1 opacity-75">
+              - Aristotle
+            </p>
+          </motion.div>
+          <motion.div
+            variants={quoteVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <p className="text-[#5D552F] text-sm italic text-center">
+              "The journey into self-love and self-acceptance must begin with
+              self-examination."
+            </p>
+            <p className="text-[#5D552F] text-xs text-right mt-1 opacity-75">
+              - Brené Brown
+            </p>
+          </motion.div>
         </div>
-        <div className="mt-4 flex items-center justify-center">
+        <div className="mt-6 flex items-center justify-center">
           <motion.button
             className="bg-transparent text-[#4A6741] px-4 py-2 rounded-full hover:bg-[#EBE5D3] transition duration-300 text-sm flex items-center border border-[#4A6741]"
             whileHover={{ scale: 1.05 }}
@@ -106,16 +122,6 @@ export default function Page() {
         </div>
       </motion.div>
 
-      {/* <motion.div
-        className="flex items-center justify-center text-[#5D552F] text-sm opacity-60"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.6 }}
-      >
-        <Zap size={14} className="mr-1 text-yellow-500" />
-        <span>0 day streak</span>
-        <span className="ml-1 text-xs">(Keep it up!)</span>
-      </motion.div> */}
       <ScheduleModal
         isOpen={isScheduleModalOpen}
         onClose={() => setIsScheduleModalOpen(false)}

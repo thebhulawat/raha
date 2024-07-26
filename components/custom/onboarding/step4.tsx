@@ -1,4 +1,3 @@
-'use client';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUser } from '@clerk/nextjs';
@@ -40,6 +39,7 @@ const Step4: React.FC<Step4Props> = ({
   const [success, setSuccess] = useState('');
   const [timer, setTimer] = useState(0);
   const [isClosing, setIsClosing] = useState(false);
+  const [resendAttempts, setResendAttempts] = useState(0);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -54,20 +54,33 @@ const Step4: React.FC<Step4Props> = ({
   if (!isLoaded || !user) return null;
 
   const handleSendOtp = async () => {
+    if (resendAttempts >= 3) {
+      setError('Maximum resend attempts reached. Please try again later.');
+      return;
+    }
+
     setLoading(true);
     setError('');
     setSuccess('');
 
     try {
-      const fullPhone = `${countryCode}${phoneNumber}`;
-      const res = await user.createPhoneNumber({ phoneNumber: fullPhone });
-      await user.reload();
-      const newPhoneNumber = user.phoneNumbers.find((a) => a.id === res.id);
-      setPhoneObj(newPhoneNumber);
-      await newPhoneNumber?.prepareVerification();
+      if (!phoneObj) {
+        // First time sending OTP
+        const fullPhone = `${countryCode}${phoneNumber}`;
+        const res = await user.createPhoneNumber({ phoneNumber: fullPhone });
+        await user.reload();
+        const newPhoneNumber = user.phoneNumbers.find((a) => a.id === res.id);
+        setPhoneObj(newPhoneNumber);
+        await newPhoneNumber?.prepareVerification();
+      } else {
+        // Resending OTP
+        await phoneObj.prepareVerification();
+      }
+
       setOtpSent(true);
       setSuccess('Verification code sent successfully!');
       setTimer(60);
+      setResendAttempts((prev) => prev + 1);
     } catch (err) {
       setError('Failed to send verification code. Please try again.');
       console.error(JSON.stringify(err, null, 2));
@@ -120,34 +133,48 @@ const Step4: React.FC<Step4Props> = ({
         countryCode={countryCode}
         setCountryCode={setCountryCode}
         phoneNumber={phoneNumber}
-        setPhoneNumber={setPhoneNumber}
+        setPhoneNumber={(number) => setPhoneNumber(number.slice(0, 13))}
         sendOtp={handleSendOtp}
         otpSent={otpSent}
+        disabled={loading || timer > 0 || resendAttempts >= 3 || otpSent}
       />
-      {error && <ErrorMessage message={error} />}
-      {success && <SuccessMessage message={success} />}
       {otpSent && (
-        <div className="flex items-center mb-4 mt-4">
-          <input
-            type="text"
-            placeholder="Enter verification code"
-            value={otp}
-            onChange={(e) => {
-              const input = e.target.value.replace(/\D/g, '');
-              setOtp(input);
-            }}
-            className="w-[200px] p-2 mr-2 border border-[#8E9B90] rounded text-lg"
-          />
-          <Button
-            onClick={handleVerifyOtp}
-            disabled={loading || otp.length === 0}
-          >
-            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-            Verify Code
-          </Button>
-          {timer > 0 && (
-            <span className="ml-2 text-sm">Resend in {timer}s</span>
-          )}
+        <div className="flex flex-col items-start mb-2 mt-2">
+          <div className="flex items-center w-full">
+            <input
+              type="text"
+              placeholder="Enter verification code"
+              value={otp}
+              onChange={(e) => {
+                const input = e.target.value.replace(/\D/g, '');
+                setOtp(input);
+              }}
+              className="w-[200px] p-1 mr-2 border border-[#8E9B90] rounded text-base"
+            />
+            <Button
+              onClick={handleVerifyOtp}
+              disabled={loading || otp.length === 0}
+              className="py-1 px-2 text-sm"
+            >
+              {loading ? (
+                <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+              ) : null}
+              Verify
+            </Button>
+            {timer > 0 && !otpVerified ? (
+              <span className="ml-2 text-xs">Resend in {timer}s</span>
+            ) : (
+              <Button
+                onClick={handleSendOtp}
+                disabled={loading || resendAttempts >= 3 || otpVerified}
+                className="ml-2 py-1 px-2 text-sm"
+              >
+                Resend
+              </Button>
+            )}
+          </div>
+          {error && <ErrorMessage message={error} />}
+          {success && <SuccessMessage message={success} />}
         </div>
       )}
       <div className="flex justify-between mt-8">

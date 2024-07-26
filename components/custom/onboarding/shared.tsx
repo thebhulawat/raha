@@ -57,6 +57,7 @@ export const PhoneInputSection: React.FC<{
   setPhoneNumber: (number: string) => void;
   sendOtp: () => void;
   otpSent: boolean;
+  disabled: boolean;
 }> = React.memo(
   ({
     countryCode,
@@ -65,11 +66,16 @@ export const PhoneInputSection: React.FC<{
     setPhoneNumber,
     sendOtp,
     otpSent,
+    disabled,
   }) => (
     <div className="flex items-center mb-4">
       <div className="relative z-20">
-        <Select value={countryCode} onValueChange={setCountryCode}>
-          <SelectTrigger className="w-[100px] mr-2 bg-white">
+        <Select 
+          value={countryCode} 
+          onValueChange={setCountryCode}
+          disabled={disabled}
+        >
+          <SelectTrigger className="w-[100px] mr-2 bg-white h-[42px]">
             <SelectValue placeholder="Code" />
           </SelectTrigger>
           <SelectContent className="bg-white">
@@ -87,11 +93,16 @@ export const PhoneInputSection: React.FC<{
         value={phoneNumber}
         onChange={(e) => {
           const input = e.target.value.replace(/\D/g, '');
-          setPhoneNumber(input.slice(0, 10));
+          setPhoneNumber(input.slice(0, 13));
         }}
-        className="flex-grow p-2 border border-[#8E9B90] rounded"
+        className="flex-grow p-2 border rounded h-[42px]"
+        disabled={disabled}
       />
-      <Button onClick={sendOtp} className="ml-2 whitespace-nowrap">
+      <Button 
+        onClick={sendOtp} 
+        disabled={disabled} 
+        className="ml-2 whitespace-nowrap h-[42px]"
+      >
         {otpSent ? 'Resend' : 'Send'} Code
       </Button>
     </div>

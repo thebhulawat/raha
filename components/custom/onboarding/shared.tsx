@@ -1,54 +1,71 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const countryCodes = [
-    { code: '+1', country: 'US' },
-    { code: '+44', country: 'UK' },
-    { code: '+91', country: 'IN' },
-    // TODO: Add more country codes here
-  ];
+  { code: '+1', country: 'US' },
+  { code: '+44', country: 'UK' },
+  { code: '+91', country: 'IN' },
+  // TODO: Add more country codes here
+];
 
-export const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = React.memo(({ children, className = '', ...props }) => (
-  <button
-    className={`text-lg font-semibold transition-all text-[#5D552F] bg-[#E6D9B8] hover:bg-[#D9C9A3] px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8E9B90] focus:ring-opacity-50 ${
-      props.disabled ? 'opacity-50 cursor-not-allowed' : ''
-    } ${className}`}
-    {...props}
-  >
-    {children}
-  </button>
-));
+export const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> =
+  React.memo(({ children, className = '', ...props }) => (
+    <button
+      className={`text-lg font-semibold transition-all text-[#5D552F] bg-[#E6D9B8] hover:bg-[#D9C9A3] px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8E9B90] focus:ring-opacity-50 ${
+        props.disabled ? 'opacity-50 cursor-not-allowed' : ''
+      } ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  ));
 
-export const ErrorMessage: React.FC<{ message: string }> = React.memo(({ message }) => (
-  <p className="text-red-500 text-sm mt-1">{message}</p>
-));
+export const ErrorMessage: React.FC<{ message: string }> = React.memo(
+  ({ message }) => <p className="text-red-500 text-sm mt-1">{message}</p>
+);
 
-export const SuccessMessage: React.FC<{ message: string }> = React.memo(({ message }) => (
-  <p className="text-green-500 text-sm mt-1">{message}</p>
-));
+export const SuccessMessage: React.FC<{ message: string }> = React.memo(
+  ({ message }) => <p className="text-green-500 text-sm mt-1">{message}</p>
+);
 
-export const PopupContent: React.FC<{ children: React.ReactNode }> = React.memo(({ children }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    transition={{ duration: 0.3 }}
-    className="bg-[#FBF3D9] p-12 rounded-lg shadow-xl max-w-[650px] w-full relative z-10 flex flex-col"
-    style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}
-  >
-    {children}
-  </motion.div>
-));
+export const PopupContent: React.FC<{ children: React.ReactNode }> = React.memo(
+  ({ children }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="bg-[#FBF3D9] p-12 rounded-lg shadow-xl max-w-[650px] w-full relative z-10 flex flex-col"
+      style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}
+    >
+      {children}
+    </motion.div>
+  )
+);
 
 export const PhoneInputSection: React.FC<{
-    countryCode: string;
-    setCountryCode: (code: string) => void;
-    phoneNumber: string;
-    setPhoneNumber: (number: string) => void;
-    sendOtp: () => void;
-    otpSent: boolean;
-  }> = React.memo(({ countryCode, setCountryCode, phoneNumber, setPhoneNumber, sendOtp, otpSent }) => (
+  countryCode: string;
+  setCountryCode: (code: string) => void;
+  phoneNumber: string;
+  setPhoneNumber: (number: string) => void;
+  sendOtp: () => void;
+  otpSent: boolean;
+}> = React.memo(
+  ({
+    countryCode,
+    setCountryCode,
+    phoneNumber,
+    setPhoneNumber,
+    sendOtp,
+    otpSent,
+  }) => (
     <div className="flex items-center mb-4">
       <div className="relative z-20">
         <Select value={countryCode} onValueChange={setCountryCode}>
@@ -78,16 +95,17 @@ export const PhoneInputSection: React.FC<{
         {otpSent ? 'Resend' : 'Send'} Code
       </Button>
     </div>
-  ));
-  
-  
-  export const ScreenshotImage: React.FC<{ src: string; rotate: number }> = React.memo(({ src, rotate }) => (
+  )
+);
+
+export const ScreenshotImage: React.FC<{ src: string; rotate: number }> =
+  React.memo(({ src, rotate }) => (
     <motion.img
       src={src}
       alt="App Insight"
-      className="w-[400px] h-auto object-cover rounded-lg shadow-lg" 
+      className="w-[400px] h-auto object-cover rounded-lg shadow-lg"
       style={{ rotate: `${rotate}deg` }}
       whileHover={{ scale: 1.05, rotate: 0, zIndex: 40 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     />
   ));

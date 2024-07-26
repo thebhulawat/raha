@@ -7,11 +7,7 @@ import {
 } from 'framer-motion';
 import { lusitana } from '@/app/fonts';
 import { ClipboardIcon, CheckIcon } from '@heroicons/react/24/outline';
-
-interface Message {
-  speaker: string;
-  content: string;
-}
+import { Message } from '@/api/calls';
 
 interface TranscriptPopupProps {
   isOpen: boolean;
@@ -37,7 +33,7 @@ const TranscriptPopup: React.FC<TranscriptPopupProps> = ({
 
   const handleCopy = () => {
     const fullTranscript = transcript
-      .map((msg) => `${msg.speaker}: ${msg.content}`)
+      .map((msg) => `${msg.role}: ${msg.content}`)
       .join('\n\n');
     navigator.clipboard.writeText(fullTranscript);
     setCopied(true);
@@ -108,7 +104,7 @@ const TranscriptPopup: React.FC<TranscriptPopupProps> = ({
                   className="bg-[#F7F3E8] p-4 rounded-xl shadow-sm"
                 >
                   <h3 className="text-lg font-semibold text-[#5D552F] mb-2">
-                    {message.speaker}
+                    {message.role}
                   </h3>
                   <p className="text-[#5D552F] text-opacity-90">
                     {message.content}

@@ -7,37 +7,24 @@ import ScheduleModal from '@/components/custom/home/schedule';
 import { abril } from '@/app/fonts';
 import { useRouter } from 'next/navigation';
 import CallNowModal from '@/components/custom/home/call-now';
-import { useUserStore, fetchUserDetails } from '@/lib/userStore';
+import { useUserStore, fetchUserDetails } from '@/lib/user-store';
 import { useAuth } from '@clerk/nextjs';
 import HomePageSkeleton from '@/components/custom/home/skeleton';
 
 export default function Page() {
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [isFreeCallModalOpen, setIsFreeCallModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const { userDetails, setUserDetails } = useUserStore();
+  const { userDetails } = useUserStore();
   const { userId, getToken } = useAuth();
 
   useEffect(() => {
-    async function loadUserDetails() {
-      if (userId) {
-        setLoading(true);
-        try {
-          const details = await fetchUserDetails(userId, getToken);
-          setUserDetails(details);
-        } catch (error) {
-          console.error('Failed to fetch user details:', error);
-        } finally {
-          setLoading(false);
-        }
-      }
+    if (userId) {
+      fetchUserDetails(getToken);
     }
+  }, [userId]);
 
-    loadUserDetails();
-  }, [userId, getToken, setUserDetails]);
-
-  if (loading) {
+  if (!userDetails) {
     return <HomePageSkeleton />;
   }
 

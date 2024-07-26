@@ -8,7 +8,7 @@ import {
 } from 'framer-motion';
 import { lusitana } from '@/app/fonts';
 import { useAuth } from '@clerk/nextjs';
-import { call } from '@/api/calls';
+import { createCall } from '@/api/calls';
 
 interface CallNowModalProps {
   isOpen: boolean;
@@ -36,10 +36,7 @@ export default function CallNowModal({ isOpen, onClose }: CallNowModalProps) {
     setSuccess(false);
 
     try {
-      const token = await getToken();
-      if (!token) throw new Error('No authentication token available');
-      
-      await call(token);
+      await createCall(getToken);
       setSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -94,11 +91,11 @@ export default function CallNowModal({ isOpen, onClose }: CallNowModalProps) {
               {isLoading ? 'Calling...' : 'Call now 😊'}
             </motion.button>
 
-            {error && (
-              <p className="mt-4 text-red-500 text-center">{error}</p>
-            )}
+            {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
             {success && (
-              <p className="mt-4 text-green-500 text-center">Your call is on its way!</p>
+              <p className="mt-4 text-green-500 text-center">
+                Your call is on its way!
+              </p>
             )}
           </motion.div>
         </motion.div>

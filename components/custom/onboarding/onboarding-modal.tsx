@@ -10,13 +10,16 @@ interface OnboardingPopupProps {
   onClose: () => Promise<void>;
 }
 
-export default function OnboardingPopup({ isOpen, onClose }: OnboardingPopupProps) {
+export default function OnboardingPopup({
+  isOpen,
+  onClose,
+}: OnboardingPopupProps) {
   const [step, setStep] = useState<number>(1);
   const [countryCode, setCountryCode] = useState<string>('+1');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
-  const nextStep = useCallback(() => setStep(s => s + 1), []);
-  const prevStep = useCallback(() => setStep(s => Math.max(1, s - 1)), []);
+  const nextStep = useCallback(() => setStep((s) => s + 1), []);
+  const prevStep = useCallback(() => setStep((s) => Math.max(1, s - 1)), []);
 
   const renderStep = useMemo(() => {
     switch (step) {
@@ -46,9 +49,7 @@ export default function OnboardingPopup({ isOpen, onClose }: OnboardingPopupProp
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <AnimatePresence mode="wait">
-        {renderStep}
-      </AnimatePresence>
+      <AnimatePresence mode="wait">{renderStep}</AnimatePresence>
     </div>
   );
 }

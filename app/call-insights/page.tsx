@@ -1,9 +1,7 @@
-import Pagination from '@/components/custom/pagination';
 import Table from '@/components/custom/call-insights/table';
 import { lusitana } from '@/app/fonts';
 import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/components/custom/skeletons';
-//import { fetchInvoicesPages } from '@/app/lib/data';
 import { Metadata } from 'next';
 
 // export const metadata: Metadata = {
@@ -19,10 +17,6 @@ export default function Page({
 }) {
   const currentPage = Number(searchParams?.page) || 1;
   //const totalPages = await fetchInvoicesPages(query)
-  // Todo update this later
-  // const response = await fetch('http://localhost:3001/')
-  // const x = await response.json()
-  // console.log(x);
 
   return (
     <div className="w-full">

@@ -6,17 +6,12 @@ import {
   useTransform,
 } from 'framer-motion';
 import { lusitana } from '@/app/fonts';
-
-interface InsightProps {
-  title: string;
-  description: string;
-  emoji: string;
-}
+import { Insight } from '@/api/calls';
 
 interface InsightsPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  insights: InsightProps[];
+  insights: Insight[];
 }
 
 const InsightsPopup: React.FC<InsightsPopupProps> = ({

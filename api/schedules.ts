@@ -7,12 +7,18 @@ interface ScheduleData {
   timezone: string;
 }
 
-export async function createOrUpdateSchedule(scheduleData: ScheduleData, token: string) {
+export async function createOrUpdateSchedule(
+  scheduleData: ScheduleData,
+  getToken: () => Promise<String | null>
+) {
+  const token = await getToken();
+  if (!token) throw new Error('No authentication token available');
+
   const response = await fetch(`${API_BASE_URL}/schedules`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(scheduleData),
   });

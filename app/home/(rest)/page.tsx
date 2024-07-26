@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
@@ -7,11 +7,26 @@ import ScheduleModal from '@/components/custom/home/schedule-modal'; // Make sur
 import { abril } from '@/app/fonts';
 import { useRouter } from 'next/navigation';
 import CallNowModal from '@/components/custom/home/call-now';
+import { useUserStore, fetchUserDetails } from '@/lib/userStore';
+import { useAuth } from '@clerk/nextjs';
+import HomePageSkeleton from '@/components/custom/home/skeleton';
 
 export default function Page() {
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [isFreeCallModalOpen, setIsFreeCallModalOpen] = useState(false);
   const router = useRouter();
+  const { userDetails } = useUserStore();
+  const { userId, getToken } = useAuth();
+
+  useEffect(() => {
+    if (userId) {
+      fetchUserDetails(userId, getToken);
+    }
+  }, [userId]);
+
+  if (!userDetails) {
+    return <HomePageSkeleton />;
+  }
 
   return (
     <div className="p-8 min-h-screen bg-[#FBF3D9]">
@@ -22,7 +37,7 @@ export default function Page() {
         transition={{ duration: 0.5 }}
       >
         {/* TODO: Update Naman here */}
-        Know yourself, Naman!
+        Know yourself, {userDetails.firstName}!
       </motion.h1>
 
       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">

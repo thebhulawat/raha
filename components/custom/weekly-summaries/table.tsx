@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { formatDateToLocal } from '@/app/lib/utils';
+import { formatDateToLocal } from '@/lib/utils';
 import Popup from '@/components/custom/popup';
 
 export default function WeeklySummariesTable({

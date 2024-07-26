@@ -21,7 +21,6 @@ export default function usePaddle() {
         }
       }
     );
-    console.log('Paddle init', paddle);
   }, []);
 
   return paddle;

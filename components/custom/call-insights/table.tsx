@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { formatDateToLocal } from '@/app/lib/utils';
+import { formatDateToLocal } from '@/lib/utils';
 import InsightsPopup from '@/components/custom/call-insights/insight-modal';
 import TranscriptModal from '@/components/custom/call-insights/transcript-modal';
 import Popup from '@/components/custom/popup';

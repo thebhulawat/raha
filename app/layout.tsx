@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   description: 'Raha Home for setting up calls and analyzing',
   // TODO: Update this url and other metadata
-  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+  metadataBase: new URL('https://app.myraha.life'),
 };
 
 export default function RootLayout({

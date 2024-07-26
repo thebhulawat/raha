@@ -1,6 +1,6 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function scheduleCall(token: string) {
+export async function call(token: string) {
   const response = await fetch(`${API_BASE_URL}/calls`, {
     method: 'POST',
     headers: {

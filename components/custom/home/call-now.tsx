@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   motion,
   AnimatePresence,
@@ -8,6 +8,7 @@ import {
 } from 'framer-motion';
 import { lusitana } from '@/app/fonts';
 import { useAuth } from '@clerk/nextjs';
+import { call } from '@/app/api/calls';
 
 interface CallNowModalProps {
   isOpen: boolean;
@@ -36,21 +37,10 @@ export default function CallNowModal({ isOpen, onClose }: CallNowModalProps) {
 
     try {
       const token = await getToken();
-      const response = await fetch(`https://9d07-49-207-219-226.ngrok-free.app/calls`, {
-        method: 'POST',
-        headers: {
-          'ngrok-skip-browser-warning': 'true',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to schedule a call');
-      }
-
+      if (!token) throw new Error('No authentication token available');
+      
+      await call(token);
       setSuccess(true);
-      // You can handle the successful response here if needed
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {

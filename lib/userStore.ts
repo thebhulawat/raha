@@ -30,27 +30,21 @@ export const useUserStore = create<UserStore>()(
 export const fetchUserDetails = async (
   userId: string,
   getToken: () => Promise<string | null>
-) => {
-  try {
-    const token = await getToken();
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+): Promise<UserDetails> => {
+  const token = await getToken();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch user details');
-    }
-
-    const data = await response.json();
-    useUserStore.getState().setUserDetails(data);
-  } catch (error) {
-    console.error('Error fetching user details:', error);
+  if (!response.ok) {
+    throw new Error('Failed to fetch user details');
   }
+
+  const data = await response.json();
+  useUserStore.getState().setUserDetails(data);
+  return data;
 };

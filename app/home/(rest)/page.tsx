@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
-import ScheduleModal from '@/components/custom/home/schedule'; 
+import ScheduleModal from '@/components/custom/home/schedule';
 import { abril } from '@/app/fonts';
 import { useRouter } from 'next/navigation';
 import CallNowModal from '@/components/custom/home/call-now';
@@ -14,18 +14,30 @@ import HomePageSkeleton from '@/components/custom/home/skeleton';
 export default function Page() {
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [isFreeCallModalOpen, setIsFreeCallModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const { userDetails } = useUserStore();
+  const { userDetails, setUserDetails } = useUserStore();
   const { userId, getToken } = useAuth();
 
-
   useEffect(() => {
-    if (userId) {
-      fetchUserDetails(userId, getToken);
+    async function loadUserDetails() {
+      if (userId) {
+        setLoading(true);
+        try {
+          const details = await fetchUserDetails(userId, getToken);
+          setUserDetails(details);
+        } catch (error) {
+          console.error('Failed to fetch user details:', error);
+        } finally {
+          setLoading(false);
+        }
+      }
     }
-  }, [userId]);
 
-  if (!userDetails) {
+    loadUserDetails();
+  }, [userId, getToken, setUserDetails]);
+
+  if (loading) {
     return <HomePageSkeleton />;
   }
 
@@ -37,7 +49,7 @@ export default function Page() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Know yourself, {userDetails.firstName}!
+        Know yourself, {userDetails?.firstName}!
       </motion.h1>
 
       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">

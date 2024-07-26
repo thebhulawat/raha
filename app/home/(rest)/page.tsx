@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { Calendar, Phone, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
 import ScheduleModal from '@/components/custom/home/schedule-modal'; // Make sure to import the new component
-import FreeCallModal from '@/components/custom/home/freecall';
 import { abril } from '@/app/fonts';
 import { useRouter } from 'next/navigation';
+import CallNowModal from '@/components/custom/home/call-now';
 
 export default function Page() {
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
@@ -106,7 +106,7 @@ export default function Page() {
         isOpen={isScheduleModalOpen}
         onClose={() => setIsScheduleModalOpen(false)}
       />
-      <FreeCallModal
+      <CallNowModal
         isOpen={isFreeCallModalOpen}
         onClose={() => setIsFreeCallModalOpen(false)}
       />

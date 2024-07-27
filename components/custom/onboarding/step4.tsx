@@ -127,7 +127,8 @@ const Step4: React.FC<Step4Props> = ({
       </h2>
       <p className="text-[#5D552F] mb-4 text-lg leading-relaxed font-normal">
         We need your phone number to call you and send a one-time code. We take
-        your privacy very seriously.
+        your privacy very seriously. You will recieve it via SMS or Whatsapp
+        from our partner <i>Ding</i>
       </p>
       <PhoneInputSection
         countryCode={countryCode}

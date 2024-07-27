@@ -20,7 +20,7 @@ export default function Page() {
 
   useEffect(() => {
     if (userId) {
-      fetchUserDetails(getToken);
+      fetchUserDetails(userId, getToken);
     }
   }, [userId]);
 

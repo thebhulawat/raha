@@ -66,7 +66,12 @@ export async function createCall(getToken: () => Promise<String | null>) {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to schedule a call');
+    if (response.status === 403) {
+      throw new Error('UPGRADE_REQUIRED');
+    } else {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `Failed to schedule a call: ${response.status}`);
+    }
   }
 
   return response.json();

@@ -20,8 +20,8 @@ export default function CallNowModal({ isOpen, onClose }: CallNowModalProps) {
   const opacity = useTransform(y, [0, 100], [1, 0]);
   const modalRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; isSuccess: boolean } | null>(null);
+  const [showProUpgrade, setShowProUpgrade] = useState(false);
   const { getToken } = useAuth();
 
   const handleDragEnd = (event: any, info: any) => {
@@ -32,14 +32,22 @@ export default function CallNowModal({ isOpen, onClose }: CallNowModalProps) {
 
   const handleCallNow = async () => {
     setIsLoading(true);
-    setError(null);
-    setSuccess(false);
+    setFeedbackMessage(null);
+    setShowProUpgrade(false);
 
     try {
       await createCall(getToken);
-      setSuccess(true);
+      setFeedbackMessage({ text: "Your call is on its way!", isSuccess: true });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      if (err instanceof Error) {
+        if (err.message === 'UPGRADE_REQUIRED') {
+          setShowProUpgrade(true);
+        } else {
+          setFeedbackMessage({ text: "Failed to schedule a call", isSuccess: false });
+        }
+      } else {
+        setFeedbackMessage({ text: "An unexpected error occurred", isSuccess: false });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -76,25 +84,42 @@ export default function CallNowModal({ isOpen, onClose }: CallNowModalProps) {
               transition={{ delay: 0.2 }}
               className="text-center space-y-6 mt-4"
             >
-              <p className="text-xl text-[#5D552F] leading-relaxed">
-                Your call from Raha is on its way! 📞✨🎉
-              </p>
+              {showProUpgrade ? (
+                <>
+                  <h2 className="text-2xl font-bold text-[#5D552F] mb-2">
+                    Oops!
+                  </h2>
+                  <p className="text-xl text-[#5D552F] leading-relaxed">
+                    Looks like you've used all your free calls.
+                  </p>
+                  <p className="text-lg text-[#5D552F] font-semibold">
+                    Please upgrade to Raha Pro! 🌟
+                  </p>
+                </>
+              ) : (
+                <p className="text-l text-[#5D552F] leading-relaxed">
+                  Ready to connect? Click to start your call! 😊
+                </p>
+              )}
             </motion.div>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={handleCallNow}
+              onClick={showProUpgrade ? onClose : handleCallNow}
               disabled={isLoading}
               className="mt-8 w-full px-6 py-3 rounded-full bg-[#F7F3E8] text-[#5D552F] hover:bg-[#EBE5D3] transition-colors text-lg font-semibold shadow-md"
             >
-              {isLoading ? 'Calling...' : 'Call now 😊'}
+              {isLoading
+                ? 'Scheduling call...'
+                : showProUpgrade
+                  ? 'Okay'
+                  : 'Call now 📞✨'}
             </motion.button>
 
-            {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
-            {success && (
-              <p className="mt-4 text-green-500 text-center">
-                Your call is on its way!
+            {feedbackMessage && (
+              <p className={`mt-4 text-sm ${feedbackMessage.isSuccess ? 'text-green-600' : 'text-red-500'} text-center`}>
+                {feedbackMessage.text}
               </p>
             )}
           </motion.div>

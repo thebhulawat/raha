@@ -16,13 +16,13 @@ export default function Page() {
   const [isFreeCallModalOpen, setIsFreeCallModalOpen] = useState(false);
   const router = useRouter();
   const { userDetails } = useUserStore();
-  const { userId, getToken } = useAuth();
+  // const { userId, getToken } = useAuth();
 
-  useEffect(() => {
-    if (userId) {
-      fetchUserDetails(userId, getToken);
-    }
-  }, [userId]);
+  // useEffect(() => {
+  //   if (userId) {
+  //     fetchUserDetails(userId, getToken);
+  //   }
+  // }, [userId]);
 
   if (!userDetails) {
     return <HomePageSkeleton />;
@@ -66,7 +66,7 @@ export default function Page() {
       </div>
 
       <motion.p
-        className="text-center text-sm mb-32 text-[#5D552F] font-medium italic"
+        className="text-center text-sm mb-32 text-[#5D552F] font-medium italic -z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.8 }}
         transition={{ duration: 0.5, delay: 0.3 }}

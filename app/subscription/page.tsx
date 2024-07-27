@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@clerk/nextjs';
-import { fetchUserDetails } from '@/lib/userStore';
+import { fetchUserDetails } from '@/lib/user-store';
 import { Loader2 } from 'lucide-react';
 
 export default function PaymentSuccessPage() {

@@ -7,13 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-const countryCodes = [
-  { code: '+1', country: 'US' },
-  { code: '+44', country: 'UK' },
-  { code: '+91', country: 'IN' },
-  // TODO: Add more country codes here
-];
+import countryCodes from '@/lib/country-codes';
 
 export const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> =
   React.memo(({ children, className = '', ...props }) => (
@@ -70,8 +64,8 @@ export const PhoneInputSection: React.FC<{
   }) => (
     <div className="flex items-center mb-4">
       <div className="relative z-20">
-        <Select 
-          value={countryCode} 
+        <Select
+          value={countryCode}
           onValueChange={setCountryCode}
           disabled={disabled}
         >
@@ -80,7 +74,7 @@ export const PhoneInputSection: React.FC<{
           </SelectTrigger>
           <SelectContent className="bg-white">
             {countryCodes.map((country) => (
-              <SelectItem key={country.code} value={country.code}>
+              <SelectItem key={country.country} value={country.code}>
                 {country.code} ({country.country})
               </SelectItem>
             ))}
@@ -98,9 +92,9 @@ export const PhoneInputSection: React.FC<{
         className="flex-grow p-2 border rounded h-[42px]"
         disabled={disabled}
       />
-      <Button 
-        onClick={sendOtp} 
-        disabled={disabled} 
+      <Button
+        onClick={sendOtp}
+        disabled={disabled}
         className="ml-2 whitespace-nowrap h-[42px]"
       >
         {otpSent ? 'Resend' : 'Send'} Code

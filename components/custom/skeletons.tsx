@@ -205,10 +205,6 @@ export function InvoicesTableSkeleton() {
             <tbody className="bg-white">
               <TableRowSkeleton />
               <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
             </tbody>
           </table>
         </div>

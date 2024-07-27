@@ -162,16 +162,20 @@ const Step4: React.FC<Step4Props> = ({
               ) : null}
               Verify
             </Button>
-            {timer > 0 && !otpVerified ? (
-              <span className="ml-2 text-xs">Resend in {timer}s</span>
-            ) : (
-              <Button
-                onClick={handleSendOtp}
-                disabled={loading || resendAttempts >= 3 || otpVerified}
-                className="ml-2 py-1 px-2 text-sm"
-              >
-                Resend
-              </Button>
+            {!otpVerified && (
+              <>
+                {timer > 0 ? (
+                  <span className="ml-2 text-xs">Resend in {timer}s</span>
+                ) : (
+                  <Button
+                    onClick={handleSendOtp}
+                    disabled={loading || resendAttempts >= 3}
+                    className="ml-2 py-1 px-2 text-sm"
+                  >
+                    Resend
+                  </Button>
+                )}
+              </>
             )}
           </div>
           {error && <ErrorMessage message={error} />}

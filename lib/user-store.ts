@@ -32,7 +32,7 @@ export const fetchUserDetails = async (
   getToken: () => Promise<string | null>
 ): Promise<UserDetails> => {
   const token = await getToken();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
